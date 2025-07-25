@@ -16,13 +16,15 @@ export default function Auth() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify(
+                {
+                    email, 
+                    password
+                }
+            ),
         });
 
-        console.log("Response status:", res.status);
-
         const result = await res.json();
-        console.log(result);
     };
     
 
