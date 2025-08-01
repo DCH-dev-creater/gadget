@@ -1,17 +1,25 @@
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('postgres://postgres:12345@postgres-gadget:5432/gadget');
+const User = require('../models').User;
+const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+
+require("dotenv").config();
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
-    console.log(`email: ${email} password: ${password}`);
+    const user = await User.findOne({ where: { email } });
 
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
+    if ( !user || !(bcrypt.compareSync(password, user.password)) ) {
+        res.status(403).json({ message: "Логин или пароль указан не верно"});
     }
 
-    return res.status(200).json({ message: 'Login successful' });
+    const token = jwt.sign({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+    }, process.env.JWT_SECRET, { expiresIn: '8h' });
+
+    return res.status(200).json({ token });
 }
