@@ -19,7 +19,7 @@ exports.login = async (req, res) => {
         id: user.id,
         email: user.email,
         name: user.name,
-    }, process.env.JWT_SECRET, { expiresIn: '8h' });
+    }, process.env.JWT_SECRET, { expiresIn: '8h', algorithm: 'HS256' });
 
     return res.status(200).json({ token });
 }

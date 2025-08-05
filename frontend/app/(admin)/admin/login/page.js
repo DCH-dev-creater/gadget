@@ -1,36 +1,46 @@
 "use client"
 import { UserIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 
 
 export default function Auth() {
-
+    const router = useRouter();
+    const [error, setError] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
 
-        const res = await fetch('/back/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                    email, 
-                    password
-                }
-            ),
-        });
+        try {
 
-        const result = await res.json();
+            const res = await fetch('/back/api/v1/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email, password}),
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.token) {
+                document.cookie = `token=${data.token}; path=/admin/dashboard; max-age=28800`;
+                router.push('/admin/dashboard');
+            } else {
+                setError(data.message || 'Неверный логин или пароль');
+            }
+
+        } catch (err) {
+            setError('Сервис временно недоступен. Попробуйте позже.');
+            return;
+        }
     };
-    
 
     return (
         <div className="w-full h-screen flex items-center justify-center dark:bg-gray-800 bg-gray-200">
-            <div className="dark:bg-gray-700 bg-white p-8 rounded-lg shadow-lg w-96">
+            <div className="dark:bg-gray-700 bg-white p-8 rounded-lg shadow-lg w-96 relative">
                 <form onSubmit={handleSubmit}>
                     <div className="flex items-end mb-4 gap-2 justify-center mb-6">
                         <UserIcon className="dark:text-gray-100 text-gray-900 size-6 mb-2" />
@@ -72,7 +82,9 @@ export default function Auth() {
                         Login
                     </button>
                 </form>
+                {error && <div className="absolute -top-10 left-0 text-red-500 w-full text-center"><p>{error}</p></div>}
             </div>
+            
         </div>
     );
 }
