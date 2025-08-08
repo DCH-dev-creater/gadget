@@ -3,8 +3,6 @@ import { UserIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-
-
 export default function Auth() {
     const router = useRouter();
     const [error, setError] = useState(null);
@@ -16,22 +14,18 @@ export default function Auth() {
         setError(null);
 
         try {
-
             const res = await fetch('/back/api/v1/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, password}),
             });
-
             const data = await res.json();
-
             if (res.ok && data.token) {
                 document.cookie = `token=${data.token}; path=/admin/dashboard; max-age=28800`;
                 router.push('/admin/dashboard');
             } else {
                 setError(data.message || 'Неверный логин или пароль');
             }
-
         } catch (err) {
             setError('Сервис временно недоступен. Попробуйте позже.');
             return;
