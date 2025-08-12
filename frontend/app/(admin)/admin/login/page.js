@@ -21,7 +21,7 @@ export default function Auth() {
             });
             const data = await res.json();
             if (res.ok && data.token) {
-                document.cookie = `token=${data.token}; path=/admin/dashboard; max-age=28800`;
+                document.cookie = `token=${data.token}; path=/admin/; max-age=28800`;
                 router.push('/admin/dashboard');
             } else {
                 setError(data.message || 'Неверный логин или пароль');

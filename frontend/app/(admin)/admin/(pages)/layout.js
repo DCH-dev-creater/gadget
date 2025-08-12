@@ -11,8 +11,6 @@ export default function ContentLayuot({children}) {
                     {children}
                 </div>
             </div>
-            
-            
         </div>
     );
 }
