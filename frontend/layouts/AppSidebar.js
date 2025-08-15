@@ -15,8 +15,8 @@ const AppSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <aside className='fixed w-[290px] mt-16 flex flex-col lg:mt-0 top-0 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200' >
-      <div className='text-xl bg-gray-200 dark:bg-gray-700 h-[74px] font-bold dark:text-gray-100 flex items-center justify-center'>GadGet</div>
+    <aside className='fixed w-[290px] mt-16 flex flex-col lg:mt-0 top-0 left-0 bg-gray-100 dark:bg-gray-800 dark:border-gray-600 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200' >
+      <div className='text-xl bg-violet-300 dark:bg-violet-900 h-[74px] font-bold dark:text-gray-100 flex items-center justify-center'>GadGet</div>
       <nav className='mt-5 px-5'>
         <ul className='space-y-2'>
           {menuItems.map((item, index) => {
@@ -24,7 +24,7 @@ const AppSidebar = () => {
             return (
               <li key={index}>
                 <Link href={item.path} className={`flex items-center space-x-3 p-2 rounded transition-colors 
-                  ${isActive ? 'bg-blue-600 dark:bg-blue-400 dark:text-gray-100 text-gray-100' : 'hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-gray-100 text-gray-900'}`}>
+                  ${isActive ? 'bg-violet-600 dark:bg-violet-400 dark:text-white text-white' : 'hover:bg-violet-300 dark:hover:bg-violet-800 dark:text-gray-100 text-gray-900'}`}>
                   <span className='mr-2'>{item.icon}</span>
                   <span className="text-sm font-medium">{item.name}</span>
                 </Link>

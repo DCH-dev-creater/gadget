@@ -11,7 +11,7 @@ const ThemeToggleButton = () => {
 
   return (
     <button
-      className="p-2 cursor-pointer items-center justify-center border-gray-300 rounded-lg z-99999 dark:border-gray-700 flex border"
+      className="p-2 cursor-pointer items-center justify-center border-gray-300 rounded-lg z-99999 dark:border-gray-700 flex border dark:hover:bg-gray-700 hover:bg-gray-300"
       onClick={handleThemeToggle}
     >
       <SunIcon className="hidden dark:block dark:text-gray-300 text-gray-600 size-6" />
