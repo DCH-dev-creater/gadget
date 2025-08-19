@@ -8,7 +8,9 @@ export default function ContentLayuot({children}) {
             <div className={`flex-1 transition-all duration-300 ease-in-out ml-[290px]`}>
                <AppHeader /> 
                 <div className="p-4 w-full bg-white dark:bg-gray-900">
-                    {children}
+                    <div className="w-full h-full grid items-center justify-left p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md"> 
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>

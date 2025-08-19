@@ -20,7 +20,7 @@ const AppSidebar = () => {
       <nav className='mt-5 px-5'>
         <ul className='space-y-2'>
           {menuItems.map((item, index) => {
-            const isActive = pathname === item.path;
+            const isActive = pathname.startsWith(item.path);
             return (
               <li key={index}>
                 <Link href={item.path} className={`flex items-center space-x-3 p-2 rounded transition-colors 
