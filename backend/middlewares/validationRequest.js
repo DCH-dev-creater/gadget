@@ -13,3 +13,16 @@ exports.validateLogin = [
 ]; 
 
 
+exports.validateBanner = [
+    body('url').optional().isString().withMessage('Неверный формат URL'),
+    body('active').optional().isBoolean().withMessage('Неверный формат активности баннера'),
+    body('sort').optional().isInt().withMessage('Неверный формат сортировки баннера'),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({errors: errors.array()});
+        }
+        next();
+    }
+];
+

@@ -2,11 +2,13 @@
 import { Bars3BottomLeftIcon } from '@heroicons/react/24/outline';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 
-const AppHeader = () => {
+const AppHeader = (props) => {
+    
+  const {setOpen} = props;
 
-    const handleToggle = () => {
-        // Logic to toggle sidebar visibility
-    };
+  const handleToggle = () => {
+    setOpen((prev) => !prev);
+  };
 
   return (
     <header className="sticky top-0 flex w-full bg-gray-200 border-gray-300 z-99999 dark:border-gray-600 dark:bg-gray-800 lg:border-b shadow">
