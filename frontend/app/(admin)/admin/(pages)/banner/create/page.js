@@ -39,6 +39,7 @@ export default function CreateBanner() {
             setUrl('');
             setImage(null);
             setError('');
+            window.location.href = 'https://gadget.learn.dev/admin/banner';
 
         } catch (err) {
             console.error(err);

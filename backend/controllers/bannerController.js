@@ -19,7 +19,6 @@ exports.create = async (req, res) => {
 
 exports.list = async (req, res) => {
     const banners = await Banner.findAll({
-        where: { 'is_active': true },
         order: [['sort', 'ASC']]
     });
     
