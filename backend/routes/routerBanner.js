@@ -17,6 +17,20 @@ router.post(
     }
 );
 
+router.post(
+    '/banner/edit/:id', 
+    upload.single('image'), 
+    bannerController.edit, 
+    (err, req, res, next) => {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }   
+        next();
+    }
+);
+
+router.delete('/banner/delete/:id', bannerController.delete);
+
 router.get('/banner/list', bannerController.list);
 
 module.exports = router;

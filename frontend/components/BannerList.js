@@ -32,9 +32,13 @@ export default function BannerList() {
             method: 'DELETE',
         })
         .then(response => {
-            if (!response.ok) {
+            if (response.status === 404) {
+                throw new Error('Запись не найдена');
+            }
+            if (response.status !== 200) {
                 throw new Error('Удаление не удалось');
             }
+            
             setBanners(banners.filter(banner => banner.id !== id));
         })
         .catch(error => {
